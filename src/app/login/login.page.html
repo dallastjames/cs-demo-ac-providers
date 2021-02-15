@@ -1,31 +1,33 @@
 <ion-content>
   <div class="container">
     <div class="container__inner">
-      <ion-card class="provider" *ngFor="let m of methods" [color]="m.color">
+      <ion-card class="provider" color="tertiary">
         <ion-card-header>
           <ion-card-title class="provider__title">
-            <fa-icon class="provider__title-icon" [icon]="m.icon"></fa-icon>
-            {{ m.name }}
+            <fa-icon class="provider__title-icon" [icon]="azureIcon"></fa-icon>
+            Azure B2C
           </ion-card-title>
         </ion-card-header>
         <ion-card-content class="provider__content">
           <ion-label class="provider__label">
             Status:
             <span class="provider__status">
-              {{ (m.state$ | async) ? 'Logged In' : 'Logged Out' }}
+              {{ (azureState$ | async) ? 'Logged In' : 'Logged Out' }}
             </span>
             <span class="provider__spacer"></span>
-            <ion-button [color]="m.color" (click)="refresh(m)">
-              <fa-icon [icon]="refreshIcon" [spin]="m.refreshing"></fa-icon>
+            <ion-button color="tertiary" (click)="refresh()">
+              <fa-icon [icon]="refreshIcon" [spin]="refreshing"></fa-icon>
             </ion-button>
           </ion-label>
           <div class="provider__actions">
-            <ion-button
-              [color]="isLight(m.color) ? 'dark' : 'light'"
-              fill="outline"
-              (click)="m.handler()"
-            >
-              {{ (m.state$ | async) ? 'Log Out' : 'Log In' }}
+            <ion-button color="dark" fill="outline" (click)="useAzure()">
+              {{ (azureState$ | async) ? 'Log Out' : 'Log In' }}
+            </ion-button>
+            <ion-button color="dark" fill="outline" (click)="useAzureAlt()">
+              Use Azure Alt
+            </ion-button>
+            <ion-button color="dark" fill="outline" (click)="expire()">
+              Expire
             </ion-button>
           </div>
         </ion-card-content>
